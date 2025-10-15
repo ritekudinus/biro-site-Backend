@@ -25,6 +25,7 @@ class EventController extends Controller
                     'deskripsi'  => $e->deskripsi,
                     'tanggal_event' => $e->tanggal_event,
                     'thumbnail'  => $e->thumbnail,
+                    'link'  => $e->link,
                     'id_user'    => $e->id_user,
                     'author'     => $e->user->name,
                 ];
@@ -50,6 +51,7 @@ class EventController extends Controller
             'deskripsi'  => 'required',
             'tanggal_event' => 'required|date',
             'thumbnail'  => 'nullable|string',
+            'link'  => 'nullable|url',
         ]);
 
         $event = Event::create([
@@ -57,6 +59,7 @@ class EventController extends Controller
             'deskripsi'  => $request->deskripsi,
             'tanggal_event' => $request->tanggal_event,
             'thumbnail'  => $request->thumbnail,
+            'link'  => $request->link,
             'id_user'    => Auth::id()
         ]);
 
@@ -91,6 +94,7 @@ class EventController extends Controller
                 'deskripsi'  => $event->deskripsi,
                 'tanggal_event' => $event->tanggal_event,
                 'thumbnail'  => $event->thumbnail,
+                'link'  => $event->link,
                 'id_user'    => $event->id_user,
                 'author'     => $event->user->name,
             ]
@@ -120,7 +124,7 @@ class EventController extends Controller
             ], 404);
         }
 
-        $event->update($request->only(['nama_event','deskripsi','tanggal_event','thumbnail']));
+        $event->update($request->only(['nama_event','deskripsi','tanggal_event','thumbnail','link']));
 
         return response()->json([
             'success' => true,
